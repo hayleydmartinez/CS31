@@ -1,0 +1,116 @@
+Hayley Martinez
+104926567
+
+A) For this project, my main problem was realizing that we had to define our constructors in the driver code. It wouldn't build because of it, and I kept having issues with errors in the main until I actually added them in. Another obstacle I faced was grasping the idea of actually implementing the try-catch in my assert statements. It took me a while to understand the conceptual side of them and then write my own try-catch statements.
+
+
+B)
+    AppleProduct p2( AppleProduct::Kind::IPAD, "Pro", "Rose", 799.00);
+    assert( p2.getCost() == 799.00 );
+    assert( p2.getKind() == AppleProduct::Kind::IPAD );
+    assert( p2.getColor() == "Rose" );
+    assert( p2.getVersion() == "Pro" );
+
+    AppleProduct p;
+    assert( p.getCost() == 0.0);
+    assert( p.getKind() == AppleProduct::Kind::NOTSPECIFIED );
+    assert( p.getColor() == "" );
+    assert( p.getVersion() == "" );
+    
+    AppleProduct p1( AppleProduct::Kind::IPHONE, "8", "Grey", 849.00 );
+    assert( p1.getCost() == 849.00 );
+    assert( p1.getKind() == AppleProduct::Kind::IPHONE );
+    assert( p1.getColor() == "Grey" );
+    assert( p1.getVersion() == "8" );
+    
+    AppleProduct p2( AppleProduct::Kind::IPAD, "Pro", "Rose", 799.00);
+    assert( p2.getCost() == 799.00 );
+    assert( p2.getKind() == AppleProduct::Kind::IPAD );
+    assert( p2.getColor() == "Rose" );
+    assert( p2.getVersion() == "Pro" );
+
+The easiest test cases to write are the ones where the code should run smoothly. Basically, the first test cases will be to test whether or not AppleProduct is storing all the values it needs to store.
+
+    AppleStore s;
+    AppleProduct w1 = s.buyWatch1("Blue");
+    assert( w1.getKind() == AppleProduct::Kind::WATCH );
+    assert( w1.getCost() == 249.00 );
+    assert( w1.getColor() == "Blue" );
+    assert( w1.getVersion() == "1" );
+    
+    AppleStore s1;
+    AppleProduct w2 = s1.buyWatch3("Pink");
+    assert( w2.getKind() == AppleProduct::Kind::WATCH );
+    assert( w2.getCost() == 329.00 );
+    assert( w2.getColor() == "Pink" );
+    assert( w2.getVersion() == "3" );
+    
+    AppleStore s3;
+    AppleProduct ipad = s1.buyiPad("Gold", 32 );
+    assert( ipad.getKind() == AppleProduct::Kind::IPAD );
+    assert( ipad.getColor() == "Gold" );
+    assert( ipad.getCost() == 329.00 );
+    assert( ipad.getVersion() == "" );
+    
+    AppleStore s4;
+    AppleProduct ipad2 = s4.buyiPad("Green", 128 );
+    assert( ipad2.getKind() == AppleProduct::Kind::IPAD );
+    assert( ipad2.getColor() == "Green" );
+    assert( ipad2.getCost() == 429.00 );
+    assert( ipad2.getVersion() == "" );
+    
+    AppleStore s5;
+    AppleProduct ipadp = s5.buyiPadPro("Orange", 64 );
+    assert( ipadp.getKind() == AppleProduct::Kind::IPAD );
+    assert( ipadp.getColor() == "Orange" );
+    assert( ipadp.getCost() == 649.00 );
+    assert( ipadp.getVersion() == "Pro" );
+
+    AppleStore s6;
+    AppleProduct ip8 = s6.buyiPhone8("Purple", 64 );
+    assert( ip8.getKind() == AppleProduct::Kind::IPHONE );
+    assert( ip8.getColor() == "Purple" );
+    assert( ip8.getCost() == 699.00 );
+    assert( ip8.getVersion() == "8" );
+
+The next test cases should be to check the AppleStore functions. You create a specific AppleProduct and check whether or not it's storing the CORRECT values.
+
+    try
+    {
+        cs31::AppleStore e1;
+        cs31::AppleProduct iphone8 = e1.buyiPhone8( "Space", 9999 );
+        assert( false );
+        
+    } catch( std::logic_error ) {
+        assert( true );
+    }
+    
+    try
+    {
+        cs31::AppleStore e2;
+        cs31::AppleProduct iphonex = e2.buyiPhoneX( "White", 390 );
+        assert( false );
+        
+    } catch( std::logic_error ) {
+        assert( true );
+    }
+    
+    try
+    {
+        cs31::AppleStore e3;
+        cs31::AppleProduct iphone8p = e3.buyiPhone8Plus("Purple", 1290 );
+        assert( false );
+    } catch( std:: logic_error ) {
+        assert( true );
+    }
+    
+    try
+    {
+        cs31::AppleStore e4;
+        cs31::AppleProduct ipadproe = e4.buyiPadPro("Green", 650 );
+        assert( false );
+    } catch( std:: logic_error ) {
+        assert( true );
+    }
+
+The next test cases should be to check invalid gigabyte values for each function, as seen above.

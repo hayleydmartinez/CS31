@@ -1,0 +1,98 @@
+Hayley Martinez
+104926567
+
+1. I had a particularly difficult time with the removeDuplicates function. I found it challenging to edit the array so that all the actual values were in the front and all the empty strings were at the end. I also had a difficult time testing my functions, since I didn't realize for a while that because certain functions edited the actual arrays themselves, my test data for the functions afterwards was skewed. After I made more arrays to test and used a different array per test I was able to more accurately test my data. 
+
+2.
+string n[0] = {};
+string a[6] = { "alpha", "beta", "gamma", "gamma", "beta", "delta" };
+string b[6] = { "delta", "gamma", "beta", "alpha", "beta", "alpha" };
+string c[9] = { "frodo?", "sam...", "merry!", "pippin!?", "gimli.", "legolas-",
+    "boromir,", "aragorn'", "gandalf!" };
+string d[4] = { "peter!", "susan!", "edmund!", "lucy!" };
+string e[5] = { "c3p0", "3.33", "bb8", "14.2.4", "r2d2" };
+string f[9] = { "blue", "lily!", "lily!", "blue", "gansey", "adam", "ronan", "noah",
+    "henry" };
+string g[6] = { "harry", "hermione", "ron", "luna", "ginny", "neville" };
+string h[10] = { "&12940", "1214.354", "...1241", "1/2", "333.", "1423", ".", "1259000", 
+    "b", "1.2" };
+string i[5] = { "ac", "aa", "ab", "aaa", ""};
+string j[6] = { "1", ".3", "..", "1.1.", "1.", "3.1" };
+
+assert(findMinimum(n,  0) == -1);
+assert(findMinimum(a,  6) ==  0);
+assert(findMinimum(a, -1) == -1);
+assert(findMinimum(b,  6) ==  3);
+assert(findMinimum(i,  5) ==  4);
+assert(findMinimum(i,  4) ==  1);
+assert(findMinimum(g,  4) == 0);
+
+The first test case checks what findMinimum would do in the case of an empty string.
+The second test case checks what findMinimum would do in a normal string situation.
+The third test case checks what findMinimum would do with a negative n value.
+The fourth test case checks what findMinimum would do when there are two minimum values.
+The fifth test case checks what findMinimum would do when there is an empty string.
+The sixth test case checks what findMinimum would do when there are multiple elements with the same beginning value.
+The seventh test case checks what findMinimum would do when you don't call the full length of the string.
+
+assert(countAllPunctuation(n,  0) == -1);
+assert(countAllPunctuation(a,  6) ==  0);
+assert(countAllPunctuation(a, -4) == -1);
+assert(countAllPunctuation(c,  9) == 12);
+assert(countAllPunctuation(d,  4) ==  4);
+assert(countAllPunctuation(e,  5) ==  3);
+assert(countAllPunctuation(h, 10) ==  8);
+
+The first test case checks what countAllPunctuation would do in the case of an empty string.
+The second test case checks what countAllPunctuation would do when there is no punctuation.
+The third test case checks what countAllPunctuation would do with a negative n value.
+The fourth test case checks what countAllPunctuation would do with multiple punctuation marks in each string.
+The fifth test case checks what countAllPunctuation would do with only one punctuation mark per string.
+The sixth test case checks what countAllPunctuation would do when the punctuation marks are not all in the same place in the string.
+The seventh test case checks what countAllPunctuation would do when there are punctuation marks that are NOT the ones listed by Prof. Stahl.
+
+assert(countFloatingPointValues(n,  0) == -1);
+assert(countFloatingPointValues(a,  6) ==  0);
+assert(countFloatingPointValues(a, -1) == -1);
+assert(countFloatingPointValues(e,  5) ==  1);
+assert(countFloatingPointValues(h, 10) ==  5);
+assert(countFloatingPointValues(j,  6) ==  4);
+
+The first test case checks what countFloatingPointValues would do in the case of an empty string.
+The second test case checks what countFloatingPointValues would do when the strings are all letters.
+The third test case checks what countFloatingPointValues would do with a negative n value.
+The fourth test case checks what countFloatingPointValues would do with numbers with multiple periods.
+The fifth test case checks what countFloatingPointValues would do with regular floating point values and numbers with no decimals.
+The sixth test case checks what countFloatingPointValues would do when the decimal is at the beginning and end of the string.
+
+assert(removeDuplicatedValues(n,  0) == -1);
+assert(removeDuplicatedValues(a,  6) ==  2 && a[5] == "");
+assert(removeDuplicatedValues(a, -1) == -1);
+assert(removeDuplicatedValues(b,  6) ==  2 && b[4] == "");
+assert(removeDuplicatedValues(c,  9) ==  0 && c[1] == "sam...");
+
+The first test case checks what removeDuplicatedValues would do in the case of an empty string.
+The second test case checks what removeDuplicatedValues would do in a normal case.
+The third test case checks what removeDuplicatedValues would do with a negative n value.
+The fourth test case checks what removeDuplicatedValues would do with a normal case.
+The fifth test case checks what removeDuplicatedValues would do if you simply do not remove anything because there are no duplicates.
+
+assert(replaceAll(n, 0, 'e', '?') == -1);
+assert(replaceAll(d, -1, 'e', '?') == -1 && d[0] == "peter!");
+assert(replaceAll(e,  5, '.', '-') ==  3 && e[1] == "3-33");
+assert(replaceAll(f,  9, 'a', 'q') ==  5 && f[5] == "qdqm");
+
+The first test case checks what replaceAll would do in the case of an empty string.
+The second test case checks what replaceAll would do with a negative n value.
+The third test case checks what replaceAll would do with switching punctuation.
+The fourth test case checks what replaceAll would do with a normal case.
+
+assert(shiftRight(n,  0, 4, "") == -1);
+assert(shiftRight(g,  6, 4, "draco") ==  4 && g[3] == "draco");
+assert(shiftRight(h, 10, 1, "3") ==  1 && h[1] == "&12940");
+assert(shiftRight(i, -9, 1, "b") == -1  && i[1] == "aa");
+
+The first test case checks what shiftRight would do in the case of an empty string.
+The second test case checks what shiftRight would do with a normal case.
+The third test case checks what shiftRight would do with a simple shift.
+The fourth test case checks what shiftRight would do with a negative length.

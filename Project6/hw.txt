@@ -1,0 +1,219 @@
+Hayley Martinez
+104926567
+
+1)a)
+    int main()
+    {
+        int arr[4] = { 0, 1, 2, 3 };
+        int* ptr = arr;
+
+        *ptr = arr[ 1 ];               // set arr[0] to 1
+        * ( ptr + 1 ) = arr[ 0 ] * 10;      // set arr[1] to 10
+        ptr += 2; 
+        ptr[0] = arr[ 1 ] * 10;        // set arr[2] to 100
+        ptr[1] = 1000;                 // set arr[3] to 1000
+	
+	ptr += 2;		       // FIX: sets to the end of arr
+
+        while (ptr > arr)	       // FIX: get rid of =
+        {
+            ptr--; 
+            cout << " " << *ptr;    // print values
+        }
+        cout << endl; 
+        return( 0 ); 
+    }
+
+
+
+  b)This function doesn't work because it is simply pass by copy and not pass by
+    reference. You need to add an ampersand when you pass the parameters.
+
+    void findLastZero(int arr[], int n, int* & p)
+    {
+        p = nullptr;    /// default value if there isn't a 0 in the array at all
+        for (int k = n - 1; k >= 0; k--) 
+        {
+            if (arr[k] == 0)      // found an element whose value is 0
+            { 
+                 p = arr + k;     // change the value of p
+                 break;           // stop looping and return
+            } 
+        }
+    }                 
+
+    int main()
+    {
+        int nums[6] = { 10, 20, 0, 40, 30, 50 };
+        int* ptr;
+
+
+        findLastZero(nums, 6, ptr);
+        if (ptr == nullptr)
+        {
+            cout << "The array doesn't have any zeros inside it." << endl; 
+        } 
+        else
+        {
+            cout << "The last zero is at address " << ptr <<  endl;
+            cout << "It's at index " << ptr - nums << endl; 
+            cout << "The item's value is " << *ptr << " which is zero!" << endl;
+        } 
+        return( 0 ); 
+    }
+
+
+
+  c)This may not work because p is pointing to a null pointer, so when it is returned
+    it has nothing to return. So, we need to create an int box where we can store the
+    value, and assign p to the reference of the int. That way, when we return *p, we
+    return an actual value.
+
+    #include <iostream>
+    using namespace std;
+
+
+    void biggest(int value1, int value2, int * resultPtr)
+    {
+        if( value1 > value2 ) 
+        {
+               *resultPtr = value1;
+        } 
+        else
+        {
+               *resultPtr = value2; 
+        }
+    }
+
+    int main()
+    {
+	int a;
+        int* p = &a;
+        biggest(15, 20, p); 
+        cout << "The biggest value is " << *p << endl;
+        return( 0 );
+    }
+
+
+
+  d)The issue with this implementation is that it is comparing the actual entire string
+    itself instead of individual letters. To solve this, you need to use the dereference
+    method and check what's INSIDE the box, e.g. the actual value of that specific
+    address versus the entire string. Below is a possible solution
+
+    // return true if two C strings are equal 
+    bool match(const char str1[], const char str2[])
+    { 
+        bool result = true; 
+        while (*str1 != 0  &&  *str2 != 0)  // zero bytes at ends 
+        {
+            if (*str1 != *str2)  // compare corresponding characters
+            {
+                result = false; 
+                break; 
+            } 
+            str1++;            // advance to the next character
+            str2++;
+        } 
+        if (result)  
+        { 
+            result = (*str1 == *str2);    // both ended at same time?
+        }
+        return( result );
+    }
+
+
+    int main()
+    {
+        char a[10] = "pointy";
+        char b[10] = "pointless"; 
+
+
+        if (match(a,b))
+        {
+            cout << "They're the same!" << endl;
+        }
+    }
+
+
+   e)The issue with this function is that int* ptr is pointing to arr, which is a 
+     LOCAL variable within computeFibonacciSequence. Because arr is destroyed after
+     computeFibonacciSequence terminates, ptr cannot actually point to anything, & the 
+     actual function itself crashes.
+
+
+2) 1. string * fp; 		    (F)
+   2. string fish[ 5 ];             (G)
+   3. fp = &fish[ 4 ];              (A)
+   4. *fp = "salmon";		    (B)
+   5. fp -= 3;			    (D)
+   6. *(fp + 3) = "salmon";         (C)
+   7. fp[ 0 ] = "salmon";	    (B)
+   8. bool b = (fp == fish);        (E)
+   9. bool b = (*fp == *(fp + 1));  (H)
+
+3)
+    #include <iostream>
+    using namespace std; 
+
+    int* minimart(int* a, int* b)                   // 2) minimart(address of 5, address of 4)
+    {
+        if (*a < *b)                                // 3) compares values of 5 and 4
+            return a;
+        else 
+            return b;                               // 4) return &array[2]
+    }
+
+    void swap1(int* a, int *b)                      // 10) swap1(&array[0], &array[1]
+    {
+        int* temp = a;                              // 11) temp = &array[0]
+        a = b;                                      // 12) &array[0] = &array[1]
+        b = temp;                                   // 13) &array[1] = temp
+    }
+
+    void swap2(int* a, int *b)                      // 15) swap2(array, &array[2])
+    {
+        int temp = *a;                              // 16) temp = 5
+        *a = *b;                                    // 17) array[0] = 4
+        *b = temp;                                  // 18) array[2] = 5
+    }
+
+    int main()
+    {
+        int array[6] = { 5, 3, 4, 17, 22, 19 };
+
+        int* ptr = minimart(array, & array[2]);      // 1) enters minimart(address of 5, address of 4) --> 4) &array[2]
+        ptr[1] = 9;                                  // 5) array[3] = 9
+        ptr += 2;                                    // 6) ptr = &array[4]
+        *ptr = -1;                                   // 7) array[4] = -1
+        *(array+1) = 79;                             // 8) array[1] = 79
+
+        cout << "diff=" << &array[5] - ptr << endl;  // 9) diff=1
+
+        swap1(&array[0], &array[1]);                 // 14) changes nothing 
+        swap2(array, &array[2]);                     // 19) switches values of array[0] and array[2]
+
+        for (int i = 0; i < 6; i++)
+            cout << array[i] << endl;                // 20) 4 79 5 9 -1 19
+
+        return( 0 );
+    } 
+4)
+
+void deleteCapitals(char * cstring)
+{
+    while (*cstring != '\0')
+    {
+        if (*cstring >= 'A' && *cstring <= 'Z')
+        {
+            for (char * index = cstring; *index != '\0'; index++)
+            {
+                *index = *(index + 1);
+            }
+        }
+        else
+        {
+            cstring++;
+        }
+    }
+}

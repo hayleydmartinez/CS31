@@ -1,0 +1,51 @@
+Hayley Martinez
+104926567
+
+1. I think the biggest obstacle for me was understanding how each function worked together to make the sudoku work. When you can't incrementally work on each function and see a concrete difference in the final product it can be difficult to isolate what you're doing wrong with each file. Another obstacle for me was that I didn't quite understand implicit parameters, more specifically how to use the parameter in the actual function itself until I realized that "this" could be used.
+
+2.
+TEST CASES FOR isImmutable, setImmutable & isValueOK
+
+Cell s0;
+assert( ! s0.isImmutable() );
+
+Cell s1;
+s1.setImmutable( true );
+assert( s1.isImmutable() );
+
+Cell s2;
+s2.setImmutable( false );
+assert( ! s2.isImmutable() );
+
+NumberSet ns0( 1, 2, 3, 4, 0, 6, 7, 8 );
+NumberSet ns1( 1, 3, 4, 0, 6, 7, 8, 0 );
+NumberSet ns2( 1, 0, 4, 0, 6, 7, 8, 9 );
+assert( isValueOK( 5, ns0, ns1, ns2 ) );
+assert( ! isValueOK( 1, ns0, ns1, ns2 ) );
+assert( isValueOK( 0, ns0, ns1, ns2 ) );
+assert( ! isValueOK( 3, ns0, ns1, ns2 ) );
+assert( ! isValueOK( 10, ns0, ns1, ns2 ) );
+
+These tests check whether isImmutable returns the correct value for mImmutable, whether setImmutable actually changes mImmutable, and whether isValueOK returns the correct value with values not in the number set, values actually in the number set, the number zero, and numbers that are not in the sudoku range.
+
+
+TEST CASES FOR notFound
+
+NumberSet ns0( 1, 2, 3, 4, 0, 6, 7, 8 );
+assert( ns0.notFound( 5 ) );
+assert( ns0.notFound( 9 ) );
+assert( ! ns0.notFound( 1 ) );
+
+These tests check whether notFound returns the correct value for numbers that are not in the number set or numbers that ARE in the number set.
+
+
+TEST CASES FOR evaluate & completed
+
+These two functions are more difficult to write test cases for, however I think the best way to test these are to run the actual sudoku and click evaluate as you solve the sudoku. If you complete the sudoku and the program exits, then you know the completed function is correct.
+
+
+
+
+
+
+

@@ -1,0 +1,8 @@
+Hayley Martinez
+104926567
+
+In Step 5, an input for preferDogs or preferCats that is larger than the input for surveyParticipants will produce nonsensical results. Negative inputs for any of those three variables also produce unrealistic results.
+
+In logic_error.cpp, I introduced a faulty strain of logic in the calculation of pctCats, multiplying instead of dividing preferCats by surveyParticipants. I also switched (pctDogs > pctCats) to (pctDogs < pctCats), which results in an inaccurate estimation of whether dogs or cats are more popular. 
+
+In compile_error.cpp, I first removed #include <iostream>. I then removed the semicolon after declaring the variable preferDogs. I also added a space in the middle of surveyParticipants in line 14. In line 17, I removed the second double quote after "How many students prefer a pet cat?. Furthermore, I removed the end curly bracket after the if statement in line 33. All these errors cause the program to not be built correctly.

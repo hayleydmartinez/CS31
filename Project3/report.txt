@@ -1,0 +1,86 @@
+Hayley Martinez
+104926567
+
+1. A few notable obstacles I overcame were loops malfunctioning and issues with storing updated values following iteration. Luckily, with some testing and closer review I was able to solve both problems.
+
+2. First, I declared all my functions. This is followed by the int main function in which I have all my test cases. Lastly, I have all of the actual code for my functions. The first is isValidEbayListingString. This takes a string and parses through it to check for errors. First it addresses the problem of an empty string, and if the string isn't empty it checks through the string sequentially. First it checks for the initial listing with a realistic price, then for a valid amount of watchers, then for both the initial and subsequent bids. Lastly, it checks for other random discrepancies. The second one is listingSold, which determines whether or not an eBay item was sold or not. It checks the initial listing, then it sums the initial bid and subsequent bids. After comparing these two values, it determines whether or not the item being sold was true. The third one is howMuch, which calculates how much the listing is sold for. First it calls listingSold to determine whether or not the listing actually has been sold, then it sums up all the bids to determine the selling price. The fourth one is watchers, which finds the difference between the amount of watches and unwatches in order to determine the number of watches at the end of the bid.
+
+3. 
+These can be used to check all valid eBay strings.
+    assert(isValidEbayListingString("L99B50WB+10UWB+40W"));
+    assert(isValidEbayListingString("l99b50wb+10uwb+40w"));
+    assert(isValidEbayListingString("L100B99"));
+    assert(isValidEbayListingString("L100B50WWWWWWW"));
+    assert(isValidEbayListingString("L100B50WUWUWUWWWWW"));
+    assert(isValidEbayListingString("L100B50WWUUB+10WWUU"));
+    assert(isValidEbayListingString("L100W"));
+    assert(isValidEbayListingString("L100WU"));
+    assert(isValidEbayListingString("L100B50WU"));
+    assert(isValidEbayListingString("L3139018"));
+    assert(isValidEbayListingString("L313901823481722B139081281351339"));
+
+These can be used to check irregularities, such as spaces, periods, watching before unwatching, watching before bids or listings are complete, and other stupid mistakes.
+    assert( ! isValidEbayListingString("L100 B50 W B+10 U W B+40 W"));
+    assert( ! isValidEbayListingString("L100.50B50"));
+    assert( ! isValidEbayListingString("L100B50UW"));
+    assert( ! isValidEbayListingString("L100BW50"));
+    assert( ! isValidEbayListingString("L100B50WBU+50"));
+    assert( ! isValidEbayListingString("L100B50WB-50"));
+    assert( ! isValidEbayListingString("L100B50UUUUUUUUU"));
+    assert( ! isValidEbayListingString("L100B50WWUUUUUUUUU"));
+    assert( ! isValidEbayListingString("WUL100"));
+    assert( ! isValidEbayListingString("L100L50"));
+    assert( ! isValidEbayListingString("L100B+50"));
+    assert( ! isValidEbayListingString("L100B50B+50B20"));
+    assert( ! isValidEbayListingString("L5B1WUWWB+2B+10+++"));
+    assert( ! isValidEbayListingString("lambda"));
+    assert( ! isValidEbayListingString("L+30B1"));
+    assert( ! isValidEbayListingString("L0B5+3"));
+    assert( ! isValidEbayListingString("L3B5l"));
+    assert( ! isValidEbayListingString("L352C"));
+    assert( ! isValidEbayListingString("L3139018+"));
+    assert( ! isValidEbayListingString("L100B+50 "));
+    assert( ! isValidEbayListingString("333"));
+    assert( ! isValidEbayListingString("lb10"));
+
+These can be used to check sold listings.
+    assert(listingSold("l99b50wb+10uwb+40w"));
+    assert(listingSold("L99B50WB+10UWB+40W"));
+    assert(listingSold("L5B1WUWWB+2B+10"));
+    assert(listingSold("L5B6"));
+    assert(listingSold("L13980B1259018390283"));
+    assert(listingSold("L10B3WWWWWWWWB+8U"));
+    assert(listingSold("L20B1B+3B+2B+3B+40WU"));
+
+These can be used to check unsold listings, either because the string is not valid or the the bid sums do not exceed the initial listing.
+    assert( ! listingSold("L20B1B+3B+2B+3B+40U"));
+    assert( ! listingSold("L23B23"));
+    assert( ! listingSold("L100B50WU"));
+    assert( ! listingSold("L100B99"));
+    assert( ! listingSold("L100B50WWWWWWW"));
+    assert( ! listingSold("L100B50WUWUWUWWWWW"));
+    assert( ! listingSold("L100B50WWUUB+10WWUU"));
+    assert( ! listingSold("L100W"));
+    assert( ! listingSold("L100WU"));
+
+These can be used to check the accuracy of the final price.
+    assert( 13 == howMuch("L5B1WUWWB+2B+10"));
+    assert(100 == howMuch("L99B50WB+10UWB+40W"));
+    assert(  6 == howMuch("L5B6"));
+    assert( 11 == howMuch("L10B3WWWWWWWWB+8U"));
+
+These can be used to check incorrect listings, incomplete listings and ones that do not get sold.
+    assert( -1 == howMuch("L100B50WWWWWWW"));
+    assert( -1 == howMuch(""));
+    assert( -1 == howMuch("L100B99"));
+
+These can be used to check a correct number of watchers.
+    assert(  2 == watchers("L99B50WB+10UWB+40W"));
+    assert(  2 == watchers("l99b50wb+10uwb+40w"));
+    assert(  0 == watchers("L100B99"));
+    assert(  7 == watchers("L100B50WWWWWWW"));
+    assert(  5 == watchers("L100B50WUWUWUWWWWW"));
+
+These can be used to check incorrect watchers due to an invalid string or invalid number of watchers.
+    assert( -1 == watchers("apple"));
+    assert( -1 == watchers("L100B50WWUUUUUUUUU"));

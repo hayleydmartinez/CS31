@@ -1,0 +1,18 @@
+Hayley Martinez
+104926567
+
+A. 
+I overcame two major obstacles when writing the code for Project 2. The first error was formatting. At times it was difficult to understand some of the code since there were many nested if and else statements, so I decided to clean up the code and put more space between different portions for easier readability. The second error was working with the getline function. I didn't quite understand it and had a bit of trouble understanding exactly how it worked compared to just using "cin >> donor_name." However, I read through the book and looked through the slides to refresh my memory and was able to master using getline.
+
+B.
+Improper Gender (male, genderfluid, Agender)
+Improper Name ("")
+Improper Age (0, -20)
+Improper Weight (0, -300)
+Improper Height (0, -24098)
+These inputs test the error codes and bounds of valid data to make sure that the user is entering reasonable quantities or answers for each prompt.
+
+Specific Age (22, 16)
+Specific Height for Males (60, 59)
+Specific Height/Weight Combinations for Females (58/146, 58/147, 59/145, 59/146, 60/141, 60/142)
+These inputs test off-by-one errors, so you can make sure that the numbers on the very border of each range output the correct result.

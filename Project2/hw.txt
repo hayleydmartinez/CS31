@@ -1,0 +1,91 @@
+Hayley Martinez
+104926567
+
+1. The code prints endl twice with no spaces, starts a new line, then prints "endline".
+
+2. This code takes an integer (stored on the variable "len") specified by the user, then prints a line with an amount of spaces equivalent to the integer minus one along with a hashtag. The code then starts a new line, then prints another line of spaces equivalent to the integer minus two along with a hashtag. This continues until there are no spaces and a line comprised of a single hashtag. Basically, the final product will look like this if the user enters "5":
+
+    #
+   #
+  #
+ #
+#
+
+3. 
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int len;
+    
+    cout << "Enter a number: ";
+    cin >> len;
+    
+    for (int i = 0; i < len; i++)
+    {
+
+        int j = i + 1;
+        while (j < len)
+        {
+            cout << " ";
+            j++;
+        }
+
+        cout << "#" << endl;
+    }
+}
+
+4. 
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int len;
+    
+    cout << "Enter a number: ";
+    cin >> len;
+    
+    int i = 0;
+    do
+    {
+        
+        int j = i + 1;
+        while (j < len)
+        {
+            cout << " ";
+            j++;
+        }
+        
+        cout << "#" << endl;
+        i++;
+        
+    } while (i < len);
+}
+
+5.
+
+switch (weekday)
+    {
+        case 1:
+            cout << "rainy days and mondays get me down";
+            break;
+        
+        case 2:
+            cout << "ruby tuesday";
+            break;
+            
+        case 6:
+            cout << "wonderful weekend";
+            break;
+            
+        case 7:
+            cout << "wonderful weekend";
+            break;
+        
+        default:
+            cout << "regular day";
+    }
